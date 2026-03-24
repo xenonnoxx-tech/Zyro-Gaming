@@ -318,15 +318,21 @@
       font-family: 'Outfit', sans-serif;
       font-size: 3.5rem;
       font-weight: 900;
-      background: linear-gradient(to right, #fff, var(--accent), #fff);
-      background-size: 200% auto;
+      background: linear-gradient(to bottom, #ffffff 0%, #FFE566 25%, #FFA500 55%, #FF4500 85%, #CC1100 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: shine 5s linear infinite;
+      animation: fireFlicker 0.12s ease-in-out infinite alternate;
       letter-spacing: -0.05em;
       line-height: 1;
       margin-bottom: 12px;
+    }
+
+    @keyframes fireFlicker {
+      0%   { filter: drop-shadow(0 0 6px #FF8C00) drop-shadow(0 0 18px #FF4500) drop-shadow(0 0 40px #FF2200); }
+      33%  { filter: drop-shadow(0 0 10px #FFAA00) drop-shadow(0 0 28px #FF6000) drop-shadow(0 0 55px #FF3300); }
+      66%  { filter: drop-shadow(0 0 4px #FF6600) drop-shadow(0 0 14px #FF3500) drop-shadow(0 0 32px #DD1100); }
+      100% { filter: drop-shadow(0 0 8px #FFCC00) drop-shadow(0 0 22px #FF5000) drop-shadow(0 0 48px #FF2800); }
     }
 
     @keyframes shine {
