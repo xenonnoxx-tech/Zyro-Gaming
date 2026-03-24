@@ -808,8 +808,8 @@
         border-radius: 8px;
         padding: 8px 10px;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        gap: 6px;
         transition: var(--transition);
       }
 
@@ -817,18 +817,15 @@
         background: rgba(255, 255, 255, 0.06);
       }
 
-
       .item-left {
         display: flex;
         align-items: center;
-        gap: 8px;
-        flex: 1;
-        min-width: 0;
+        gap: 7px;
       }
 
       .item-img-wrap {
-        width: 24px;
-        height: 24px;
+        width: 22px;
+        height: 22px;
         flex-shrink: 0;
         display: flex;
         align-items: center;
@@ -856,6 +853,7 @@
         font-size: 0.8rem;
         font-weight: 900;
         color: var(--accent);
+        padding-left: 2px;
       }
 
       .lvl-max .item-lvl {
@@ -1030,8 +1028,8 @@
       border-radius: 8px;
       padding: 8px 10px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 6px;
       transition: var(--transition);
     }
 
@@ -1039,18 +1037,15 @@
       background: rgba(255, 255, 255, 0.06);
     }
 
-
     .item-left {
       display: flex;
       align-items: center;
-      gap: 8px;
-      flex: 1;
-      min-width: 0;
+      gap: 7px;
     }
 
     .item-img-wrap {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
@@ -1065,12 +1060,12 @@
     }
 
     .item-name {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
       color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: break-word;
+      line-height: 1.2;
     }
 
     .item-lvl {
@@ -1078,6 +1073,7 @@
       font-size: 0.8rem;
       font-weight: 900;
       color: var(--accent);
+      padding-left: 2px;
     }
 
     .lvl-max .item-lvl {
@@ -1630,7 +1626,7 @@
               </div>
               <div class="item-name" title="${item.name}">${escHtml(item.name)}</div>
             </div>
-            <div class="item-lvl">${item.level}<span class="lvl-dim">/${item.maxLevel}</span></div>
+            <div class="item-lvl" style="font-size:0.75rem;">${item.level}<span class="lvl-dim">/${item.maxLevel}</span></div>
           </div>
         `;
 
