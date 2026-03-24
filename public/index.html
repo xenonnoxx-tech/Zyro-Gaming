@@ -304,9 +304,6 @@
     }
 
     #clan-badge {
-      width: 90px;
-      height: 90px;
-      animation: floatBadge 4s ease-in-out infinite;
       transition: var(--transition);
     }
 
@@ -1313,13 +1310,10 @@
   <!-- Header -->
   <header id="main-header">
     <div class="header-content" style="display: flex; align-items: center; gap: 40px; width: 100%;">
-      <div style="position: relative; cursor: pointer; flex-shrink: 0;" onclick="openClanSearch()">
-        <img id="clan-badge" src="" alt="Badge" onerror="this.style.display='none'" />
-      </div>
 
       <div class="clan-info" style="display:flex; align-items:center; gap:16px;">
-        <img id="custom-logo" src="/logo.png" alt="Logo" onerror="this.style.display='none'"
-          style="height: 80px; width: 80px; object-fit: contain; flex-shrink:0;" />
+        <img id="clan-badge" src="" alt="Badge" onerror="this.style.display='none'"
+          style="width:80px; height:80px; object-fit:contain; flex-shrink:0; cursor:pointer; animation: floatBadge 4s ease-in-out infinite;" onclick="openClanSearch()" />
         <div>
         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 10px;">
           <h1 id="clan-name">Loading Clan...</h1>
@@ -1588,7 +1582,9 @@
     }
 
     function renderClan(clan) {
-      document.getElementById("clan-badge").src = clan.badgeUrl || "";
+      const badge = document.getElementById("clan-badge");
+      badge.style.display = "";
+      badge.src = clan.badgeUrl || "";
       document.getElementById("clan-name").textContent = clan.name;
       document.getElementById("clan-tag").textContent = clan.tag;
       document.getElementById("clan-members").textContent = clan.members;
