@@ -152,41 +152,50 @@
 
     /* ── Modals ── */
     #search-modal,
-    #player-modal {
-      display: none;
+    #player-modal,
+    #search-modal {
+      display: flex;
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(24px);
+      backdrop-filter: blur(0px);
       z-index: 1000;
       align-items: center;
       justify-content: center;
       padding: 20px;
       opacity: 0;
-      transition: opacity 0.4s ease;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
     }
 
     #search-modal.open,
     #player-modal.open {
-      display: flex;
       opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      backdrop-filter: blur(24px);
     }
 
     #search-modal.open .modal-box,
     #player-modal.open .modal-box {
-      animation: springUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation: modalPopIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
-    @keyframes springUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.95);
-      }
+    #search-modal.closing .modal-box,
+    #player-modal.closing .modal-box {
+      animation: modalPopOut 0.3s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+    }
 
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    @keyframes modalPopIn {
+      0%   { opacity: 0; transform: scale(0.6) translateY(30px); }
+      60%  { opacity: 1; transform: scale(1.04) translateY(-4px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes modalPopOut {
+      0%   { opacity: 1; transform: scale(1) translateY(0); }
+      100% { opacity: 0; transform: scale(0.7) translateY(20px); }
     }
 
     .modal-box {
@@ -1233,7 +1242,7 @@
     <div class="modal-box">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
         <h2 style="margin-bottom:0">Search Player</h2>
-        <button onclick="document.getElementById('player-modal').classList.remove('open')"
+        <button onclick="closeModal('player-modal')"
           style="background:rgba(255,255,255,0.05);border:none;color:#fff;font-size:1.5rem;width:40px;height:40px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition)">&times;</button>
       </div>
       <div class="modal-input-row">
@@ -1262,7 +1271,7 @@
     <div class="modal-box">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
         <h2 style="margin-bottom:0">Global Search</h2>
-        <button onclick="document.getElementById('search-modal').classList.remove('open')"
+        <button onclick="closeModal('search-modal')"
           style="background:rgba(255,255,255,0.05);border:none;color:#fff;font-size:1.5rem;width:40px;height:40px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition)">&times;</button>
       </div>
       <div class="modal-input-row">
@@ -1474,6 +1483,15 @@
   </main>
 
   <script>
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('closing');
+      setTimeout(() => {
+        el.classList.remove('open', 'closing');
+      }, 300);
+    }
+
     let allPlayers = [];
     let warAttacks = {};
     let warState = "notInWar";
@@ -1700,7 +1718,7 @@
     }
 
     document.getElementById("close-player-modal").addEventListener("click", () => {
-      document.getElementById("player-modal").classList.remove("open");
+      closeModal("player-modal");
     });
 
     document.getElementById("player-search-btn").addEventListener("click", searchPlayer);
@@ -1907,7 +1925,7 @@
     }
 
     async function selectClan(tag) {
-      document.getElementById("search-modal").classList.remove("open");
+      closeModal("search-modal");
       document.getElementById("loading").style.display = "block";
       document.getElementById("table-wrap").style.display = "none";
       try {
