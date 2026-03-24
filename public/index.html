@@ -798,7 +798,7 @@
 
       .items-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         gap: 12px;
       }
 
@@ -822,8 +822,8 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        overflow: hidden;
         flex: 1;
+        min-width: 0;
       }
 
       .item-img-wrap {
@@ -843,12 +843,12 @@
       }
 
       .item-name {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         font-weight: 600;
         color: #fff;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.2;
       }
 
       .item-lvl {
