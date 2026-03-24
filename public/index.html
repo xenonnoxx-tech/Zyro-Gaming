@@ -605,9 +605,19 @@
       }
     }
 
+    /* ── Utility Classes ── */
+    .hide-mobile { display: block; }
+    .hide-tablet { display: block; }
+
+    @media (max-width: 768px) {
+      .hide-tablet { display: none !important; }
+    }
+
     @media (max-width: 600px) {
+      .hide-mobile { display: none !important; }
+
       #hero-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
       }
 
       #status-bar {
@@ -625,18 +635,40 @@
 
     @media (max-width: 480px) {
       header {
-        flex-direction: column;
-        text-align: center;
-        gap: 24px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
       }
 
-      .clan-info .meta {
-        justify-content: center;
+      #clan-badge {
+        width: 52px;
+        height: 52px;
+      }
+
+      #custom-logo {
+        display: none !important;
       }
 
       .clan-info h1 {
-        font-size: 1.75rem;
+        font-size: 1.1rem !important;
       }
+
+      .clan-info .meta {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .clan-info .meta .glass {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+      }
+
+      #hero-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
 
       @keyframes floatBadge {
         0% {
@@ -662,26 +694,6 @@
         transition: var(--transition);
       }
 
-      /* ── Utility Classes (Final Overrides) ── */
-      .hide-mobile {
-        display: block;
-      }
-
-      .hide-tablet {
-        display: block;
-      }
-
-      @media (max-width: 768px) {
-        .hide-tablet {
-          display: none !important;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .hide-mobile {
-          display: none !important;
-        }
-      }
 
       #player-modal .modal-box {
         max-width: 950px;
