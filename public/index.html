@@ -1312,15 +1312,9 @@
     <div class="header-content" style="display: flex; align-items: center; gap: 40px; width: 100%;">
 
       <div class="clan-info" style="display:flex; align-items:center; gap:16px;">
-        <img id="clan-badge" src="" alt="Badge" onerror="this.style.display='none'"
-          style="width:80px; height:80px; object-fit:contain; flex-shrink:0; cursor:pointer; animation: floatBadge 4s ease-in-out infinite;" onclick="openClanSearch()" />
         <div>
         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 10px;">
           <h1 id="clan-name">Loading Clan...</h1>
-          <div class="glass"
-            style="background: var(--accent); color: #000; padding: 6px 12px; border-radius: 12px; font-size: 14px; font-weight: 900; box-shadow: 0 10px 20px rgba(0,0,0,0.5); border: 2px solid var(--bg-dark); font-family: 'Orbitron'; display: inline-block;">
-            LVL <span id="clan-level-badge">0</span>
-          </div>
         </div>
         <div class="meta" style="display: flex; gap: 15px; flex-wrap: wrap;">
           <span class="glass" id="clan-tag"
@@ -1341,7 +1335,10 @@
         </div>
       </div>
 
-      <div style="margin-left: auto; display: flex; align-items: center; gap: 24px;" class="hide-mobile">
+      <img id="clan-badge" src="" alt="Badge" onerror="this.style.display='none'"
+        style="width:55px; height:55px; object-fit:contain; flex-shrink:0; cursor:pointer; animation: floatBadge 4s ease-in-out infinite; margin-left:auto;" onclick="openClanSearch()" />
+
+      <div style="display: flex; align-items: center; gap: 24px;" class="hide-mobile">
         <div class="glass"
           style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px; padding: 16px 28px; border-radius: 20px; border: 1px solid rgba(255,215,0,0.15); box-shadow: 0 10px 40px rgba(0,0,0,0.4); background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,215,0,0.03));">
 
