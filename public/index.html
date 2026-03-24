@@ -1315,6 +1315,8 @@
         <div>
         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 10px;">
           <h1 id="clan-name">Loading Clan...</h1>
+          <img id="clan-badge" src="" alt="Badge" onerror="this.style.display='none'"
+            style="width:70px; height:70px; object-fit:contain; flex-shrink:0; cursor:pointer; animation: floatBadge 4s ease-in-out infinite; filter: drop-shadow(0 0 14px rgba(255,180,0,0.5));" onclick="openClanSearch()" />
         </div>
         <div class="meta" style="display: flex; gap: 15px; flex-wrap: wrap;">
           <span class="glass" id="clan-tag"
@@ -1335,10 +1337,7 @@
         </div>
       </div>
 
-      <img id="clan-badge" src="" alt="Badge" onerror="this.style.display='none'"
-        style="width:90px; height:90px; object-fit:contain; flex-shrink:0; cursor:pointer; animation: floatBadge 4s ease-in-out infinite; margin:0 auto; filter: drop-shadow(0 0 18px rgba(255,180,0,0.5));" onclick="openClanSearch()" />
-
-      <div style="display: flex; align-items: center; gap: 24px;" class="hide-mobile">
+      <div style="margin-left:auto; display: flex; align-items: center; gap: 24px;" class="hide-mobile">
         <div class="glass"
           style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px; padding: 16px 28px; border-radius: 20px; border: 1px solid rgba(255,215,0,0.15); box-shadow: 0 10px 40px rgba(0,0,0,0.4); background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,215,0,0.03));">
 
