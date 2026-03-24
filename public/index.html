@@ -609,6 +609,7 @@
     /* ── Utility Classes ── */
     .hide-mobile { display: block; }
     .hide-tablet { display: block; }
+    .show-mobile-only { display: none; }
 
     @media (max-width: 768px) {
       .hide-tablet { display: none !important; }
@@ -616,6 +617,7 @@
 
     @media (max-width: 600px) {
       .hide-mobile { display: none !important; }
+      .show-mobile-only { display: flex !important; }
 
       #hero-stats {
         grid-template-columns: 1fr 1fr;
@@ -1270,6 +1272,21 @@
 
       </div>
     </div>
+
+    <!-- Mobile-only links bar -->
+    <div class="show-mobile-only" style="display:none; width:100%; padding: 10px 16px 4px; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
+      <a href="https://youtube.com/@zyrogaming-leo?si=bd3FyrIwtNBdM0fQ" target="_blank"
+        style="display:flex; align-items:center; gap:6px; background:rgba(255,0,0,0.1); padding:6px 14px; border-radius:12px; border:1px solid rgba(255,0,0,0.25); text-decoration:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#FF0000"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4s-6.254,0-7.814,0.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M9.8,14.5v-5l4.8,2.5L9.8,14.5z"/></svg>
+        <span style="color:#FFD700; font-weight:900; font-size:0.8rem; font-family:'Outfit',sans-serif;">ZYRO GAMING</span>
+      </a>
+      <a href="https://chat.whatsapp.com/IV3bh8SgKNY4MYYS8OBL20" target="_blank"
+        style="display:flex; align-items:center; gap:6px; background:rgba(37,211,102,0.1); padding:6px 14px; border-radius:12px; border:1px solid rgba(37,211,102,0.25); text-decoration:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#25D366"><path d="M12 2.1c5.466 0 9.9 4.434 9.9 9.9 0 1.58-.37 3.08-.99 4.4L22.5 22.5l-6.2-1.61c-1.28.58-2.73.91-4.3.91-5.466 0-9.9-4.434-9.9-9.9S6.534 2.1 12 2.1zm0 1.65c-4.55 0-8.25 3.7-8.25 8.25 0 1.62.48 3.12 1.3 4.36l-1.07 3.63 3.72-.97c1.19.78 2.61 1.23 4.14 1.23 4.55 0 8.25-3.7 8.25-8.25S16.55 3.75 12 3.75zm3.87 11.23c-.15.22-.52.53-1.12.72-.45.15-1.2.22-3.37-.82-2.32-1.12-3.75-3.3-3.82-3.45-.08-.07-1.12-1.35-1.12-2.78 0-1.42.52-2.1.82-2.4.22-.22.6-.3.9-.3.15 0 .37.08.52.08.15 0 .37-.08.6.45.22.45.67 1.57.75 1.72.07.15.22.3.3.52.15.15.3.37.52.6.22.22.3.45.15.75-.15.3-.3.52-.45.67-.15.15-.3.37-.45.52-.15.15-.3.45-.08.67.75 1.5 1.8 2.32 2.55 2.7.22.15.52.15.75-.07.22-.22.67-.82.9-1.2.15-.3.4-.3.6-.15.22.15 1.42.67 1.65.82.22.15.37.22.45.37.07.15.07.75-.08 1.12z"/></svg>
+        <span style="color:#fff; font-weight:800; font-size:0.8rem; font-family:'Outfit',sans-serif;">WHATSAPP</span>
+      </a>
+    </div>
+
   </header>
 
   <!-- Status Bar -->
