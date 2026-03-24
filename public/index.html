@@ -313,7 +313,7 @@
 
     .clan-info h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 3.5rem;
+      font-size: clamp(1.8rem, 3vw, 3.2rem);
       font-weight: 900;
       background: linear-gradient(to right, #fff 0%, #FFD700 40%, #FFA500 60%, #fff 100%);
       background-size: 200% auto;
@@ -1311,7 +1311,7 @@
   <header id="main-header">
     <div class="header-content" style="display: flex; align-items: center; gap: 40px; width: 100%;">
 
-      <div class="clan-info" style="display:flex; align-items:center; gap:16px;">
+      <div class="clan-info" style="display:flex; align-items:center; gap:16px; min-width:0; flex-shrink:1;">
         <div>
         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 10px;">
           <h1 id="clan-name">Loading Clan...</h1>
