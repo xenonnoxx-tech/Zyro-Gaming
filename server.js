@@ -6,8 +6,7 @@ const path = require("path");
 const app = express();
 
 // ─── CONFIG ───────────────────────────────────────────────
-const API_KEY = process.env.COC_API_KEY || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImNiZDhhZThiLWM4NTYtNGQyYy05NDg4LTE5YWViOTVjODUxZiIsImlhdCI6MTc3NDMwMjU2MSwic3ViIjoiZGV2ZWxvcGVyLzVkYTk0MTAzLTM5ZGEtZWJiZS03NjI2LTAxZmE0ZDBiZGQ0YSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjc0LjIyMC40OC4yNDYiXSwidHlwZSI6ImNsaWVudCJ9XX0.0S0QenNZEefQEJuRO_FMlF3bet8OeOR9G0njMoEEDqpuK3Zo3p5xqWAJvtvP4OcPFDjTYLWmQBDeCYeM-e9nsQ";
-// Note: set COC_API_KEY env var in Render dashboard to override
+const API_KEY = process.env.COC_API_KEY || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjY5ZWZiNzRiLTc5ZTItNGY1Mi04Yzk2LWRjMmJjYjM5MTQ1ZSIsImlhdCI6MTc3NDM1NDg1Miwic3ViIjoiZGV2ZWxvcGVyLzVkYTk0MTAzLTM5ZGEtZWJiZS03NjI2LTAxZmE0ZDBiZGQ0YSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjE4NC43Mi40MC4xNTUiXSwidHlwZSI6ImNsaWVudCJ9XX0.tfHyoRbLa8gxnyY6t5dIFFAdTx-ea_EcantBUJ6HFOMVENuym9dovCjBANjoUSpubOW2b5aT7vEBDciguKJSGw";
 const CLAN_TAG = "C92R9JCJ";
 const REFRESH_INTERVAL = 60000;
 // ──────────────────────────────────────────────────────────
