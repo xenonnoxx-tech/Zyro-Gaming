@@ -171,6 +171,43 @@ app.get("/api/clan-data", async (req, res) => {
   }
 });
 
+// Current war attacks — returns map of playerTag -> last attack info
+app.get("/api/war-attacks", async (req, res) => {
+  let tag = (req.query.tag || `#${CLAN_TAG}`).trim();
+  if (!tag.startsWith("#")) tag = `#${tag}`;
+  try {
+    const warRes = await axios.get(`https://api.clashofclans.com/v1/clans/${encodeURIComponent(tag)}/currentwar`, { headers });
+    const war = warRes.data;
+    if (!war || war.state === "notInWar") return res.json({ state: "notInWar", attacks: {} });
+
+    const attacks = {};
+    (war.clan?.members || []).forEach(member => {
+      if (member.attacks && member.attacks.length > 0) {
+        // Sort by order desc to get latest attack
+        const sorted = [...member.attacks].sort((a, b) => b.order - a.order);
+        const latest = sorted[0];
+        // Find defender's map position
+        const defender = (war.opponent?.members || []).find(m => m.tag === latest.defenderTag);
+        attacks[member.tag] = {
+          stars: latest.stars,
+          destruction: latest.destructionPercentage,
+          defenderMapPos: defender?.mapPosition ?? null,
+          totalAttacks: member.attacks.length
+        };
+      } else {
+        attacks[member.tag] = null; // member hasn't attacked
+      }
+    });
+    res.json({ state: war.state, teamSize: war.teamSize, attacks });
+  } catch (err) {
+    const status = err.response?.status || 500;
+    // 403 = war log private, 404 = not in war
+    if (status === 403) return res.json({ state: "private", attacks: {} });
+    if (status === 404) return res.json({ state: "notInWar", attacks: {} });
+    res.status(status).json({ error: err.response?.data?.message || err.message });
+  }
+});
+
 // ── Data fetching ──
 
 async function fetchClan() {

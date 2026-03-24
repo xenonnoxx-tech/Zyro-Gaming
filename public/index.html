@@ -1374,6 +1374,7 @@
             <th data-col="bestTrophies" class="hide-tablet">Best Trophies</th>
             <th data-col="warStars" class="hide-tablet">⭐ Stars</th>
             <th data-col="donations" class="hide-mobile">Donations</th>
+            <th data-col="lastWar" class="hide-mobile">⚔️ Last War</th>
           </tr>
         </thead>
         <tbody id="player-list"></tbody>
@@ -1383,10 +1384,23 @@
 
   <script>
     let allPlayers = [];
+    let warAttacks = {};
+    let warState = "notInWar";
+    let currentClanTag = null;
     let sortCol = "trophies";
     let sortAsc = false;
     let countdown = 60;
     let countdownTimer;
+
+    async function fetchWarAttacks(tag) {
+      try {
+        const url = tag ? `/api/war-attacks?tag=${encodeURIComponent(tag)}` : "/api/war-attacks";
+        const res = await fetch(url);
+        const data = await res.json();
+        warAttacks = data.attacks || {};
+        warState = data.state || "notInWar";
+      } catch { warAttacks = {}; warState = "notInWar"; }
+    }
 
     // ── Polling ──
     async function fetchData() {
@@ -1398,8 +1412,10 @@
           return;
         }
         allPlayers = data.players;
+        currentClanTag = data.clan?.tag || null;
         renderClan(data.clan);
         updateHeroStats(data.players, data.clan);
+        await fetchWarAttacks(null);
         renderPlayers();
         document.getElementById("loading").style.display = "none";
         document.getElementById("table-wrap").style.display = "block";
@@ -1537,6 +1553,23 @@
           <td class="hide-mobile" style="color:var(--color-success); font-weight:700; font-family: 'Orbitron';">
             <span style="font-size: 0.7rem; display: block; margin-bottom: -5px;">DONATED</span>
             +${(p.donations || 0).toLocaleString()}
+          </td>
+          <td class="hide-mobile">
+            ${(() => {
+              const atk = warAttacks[p.tag];
+              if (warState === 'notInWar' || warState === 'private') {
+                return `<span style="font-size:0.7rem; color:var(--text-dim);">—</span>`;
+              }
+              if (!atk) {
+                return `<span style="font-size:0.7rem; color:var(--text-dim);">Not Attacked</span>`;
+              }
+              const stars = '★'.repeat(atk.stars) + '☆'.repeat(3 - atk.stars);
+              const starColor = atk.stars === 3 ? 'var(--accent-secondary)' : atk.stars >= 1 ? 'var(--accent)' : '#ef4444';
+              return `<div style="line-height:1.3;">
+                <div style="font-family:'Orbitron'; font-weight:900; color:${starColor}; font-size:0.85rem; letter-spacing:1px;">${stars}</div>
+                <div style="font-size:0.7rem; color:var(--text-dim); font-weight:700;">${atk.destruction}% · #${atk.defenderMapPos ?? '?'}</div>
+              </div>`;
+            })()}
           </td>
         `;
         tbody.appendChild(tr);
@@ -1791,8 +1824,10 @@
         const data = await res.json();
         if (data.error) throw new Error(data.error);
         allPlayers = data.players;
+        currentClanTag = data.clan?.tag || tag;
         renderClan(data.clan);
         updateHeroStats(data.players, data.clan);
+        await fetchWarAttacks(tag);
         renderPlayers();
         document.getElementById("loading").style.display = "none";
         document.getElementById("table-wrap").style.display = "block";
