@@ -1,0 +1,9 @@
+node_modules/
+.env
+package.zip
+player.json
+*.py
+match_fail.txt
+test_api.js
+fetch_player.js
+.claude/
