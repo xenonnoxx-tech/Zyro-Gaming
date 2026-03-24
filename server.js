@@ -19,6 +19,15 @@ const headers = { Authorization: `Bearer ${API_KEY}` };
 
 // ── API endpoints ──
 
+app.get("/api/myip", async (req, res) => {
+  try {
+    const r = await axios.get("https://api.ipify.org?format=json");
+    res.json({ outboundIP: r.data.ip });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.get("/api/test", async (req, res) => {
   try {
     await axios.get("https://api.clashofclans.com/v1/clans?name=test&limit=1", { headers });
