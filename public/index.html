@@ -263,7 +263,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease, background 0.3s ease;
+      transition: padding 0.3s ease, background 0.3s ease;
     }
 
     header.scrolled {
@@ -273,6 +273,17 @@
 
     header.header-hidden {
       transform: translateY(-100%);
+    }
+
+    header.header-spring {
+      animation: headerSpringDown 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes headerSpringDown {
+      0%   { transform: translateY(-100%); }
+      60%  { transform: translateY(6px); }
+      80%  { transform: translateY(-3px); }
+      100% { transform: translateY(0); }
     }
 
     @keyframes floatBadge {
@@ -1580,6 +1591,7 @@
 
     // ── Scroll Effect ──
     let lastScrollY = window.scrollY;
+    let headerWasHidden = false;
     window.addEventListener('scroll', () => {
       const header = document.getElementById('main-header');
       const currentScrollY = window.scrollY;
@@ -1587,8 +1599,15 @@
       else header.classList.remove('scrolled');
       if (currentScrollY > 80) {
         header.classList.add('header-hidden');
-      } else {
+        header.classList.remove('header-spring');
+        headerWasHidden = true;
+      } else if (headerWasHidden) {
         header.classList.remove('header-hidden');
+        header.classList.remove('header-spring');
+        void header.offsetWidth; // force reflow
+        header.classList.add('header-spring');
+        headerWasHidden = false;
+        setTimeout(() => header.classList.remove('header-spring'), 600);
       }
       lastScrollY = currentScrollY;
     });
